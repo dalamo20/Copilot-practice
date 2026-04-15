@@ -7,9 +7,15 @@
 
 param()
 
+# Only log changes to governance framework files (not all .claude files)
 $TRACKED_PATTERNS = @(
-    ".claude/agents/",
-    ".claude/skills/",
+    ".claude/agents/super-auditor",
+    ".claude/agents/comparator",
+    ".claude/agents/project-synthesizer",
+    ".claude/agents/portfolio-governor",
+    ".claude/skills/audit-asset",
+    ".claude/skills/govern-submissions",
+    ".claude/skills/self-audit",
     "governance/"
 )
 

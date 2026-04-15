@@ -14,9 +14,15 @@ $BLOCK_PATTERNS = @(
     "governance/references/anti-patterns.md"
 )
 
+# Warn when editing governance framework files (not all .claude files)
 $WARN_PATTERNS = @(
-    ".claude/agents/",
-    ".claude/skills/",
+    ".claude/agents/super-auditor",
+    ".claude/agents/comparator",
+    ".claude/agents/project-synthesizer",
+    ".claude/agents/portfolio-governor",
+    ".claude/skills/audit-asset",
+    ".claude/skills/govern-submissions",
+    ".claude/skills/self-audit",
     "governance/"
 )
 
