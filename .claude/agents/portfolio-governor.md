@@ -61,6 +61,21 @@ Return:
 7. Reject List
 8. Top Governance Actions
 
+## Handling Incomplete or Errored Data
+
+Before making decisions, check the synthesis report for data completeness notes:
+
+- If any asset audit errored → exclude it from decisions, mark decision as "error — cannot govern"
+- If any Stage 2 comparison was skipped → flag affected decisions as "provisional"
+- If synthesis report notes "provisional" findings → apply conservative verdict downgrades:
+  - Preferred Standard (90+) → Approved (80–89)
+  - Approved (80–89) → Approved with Restrictions (70–79)
+  - Approved with Restrictions (70–79) → Major Revision Required (54–69)
+  - All decisions marked: "provisional — based on incomplete audit data. Re-run full pipeline
+    for final decisions."
+
+Do not make binding governance decisions on incomplete data.
+
 ## Safety Hard Gate
 
 Safety is enforced as a **binary structural gate**, independent of total score:
@@ -73,17 +88,11 @@ This assures the framework's core invariant: *"unsafe assets cannot be approved.
 
 ## Score-to-Decision Mapping
 
-Use the scoring standard defined in `governance/scoring-standard.md` as the canonical reference. Map total weighted scores to decisions as follows:
+Use `governance/scoring-standard.md` as the canonical reference for all score ranges,
+decision labels, and interpretation thresholds. Do not re-declare weights or thresholds here.
 
-| Score Range | Interpretation | Default Decision |
-|-------------|----------------|-----------------|
-| 90-100 | Excellent | Preferred Standard |
-| 80-89 | Strong | Approved |
-| 70-79 | Good | Approved with Restrictions |
-| 54-69 | Needs Improvement | Major Revision Required — do not approve until findings are remediated and the asset is re-audited |
-| 0-53 | Reject | Rejected |
-
-These defaults may be adjusted by context (e.g., a 38-scoring asset may be approved with restrictions if it fills a unique niche), but any deviation must be justified explicitly in the rationale.
+Any deviation from the standard mapping (e.g., approving a lower-scoring unique-niche asset)
+must be justified explicitly in the decision rationale.
 
 ## Rules
 

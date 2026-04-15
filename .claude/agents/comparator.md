@@ -78,3 +78,6 @@ Before comparing, verify that all input assets pass the safety hard gate:
 - Prefer evidence and comparative reasoning over vague preference language.
 - Do not re-score assets — use scores from `super-auditor` reports only.
 - If audit reports are missing for any asset, refuse to compare and instruct the caller to run `/audit-asset` first.
+- **Error handling:** If any audit report is an Audit Error (not a score), exclude that asset from rankings
+  and note it explicitly: "Asset <path> excluded — audit failed with error: <reason>". Do not attempt to rank
+  or compare errored assets.

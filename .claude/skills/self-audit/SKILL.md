@@ -8,14 +8,15 @@ when_to_use: >
   Before and after modifying any governance artifact (agent files, skills, scoring-standard.md,
   anti-patterns.md). Also run as a baseline check when bumping governance/VERSION.
   Do not invoke automatically — only on explicit /self-audit invocation.
-argument-hint: ""
+argument-hint: "[no arguments — audits framework files only]"
 disable-model-invocation: true
 context: fork
+# Read/Glob/Grep for framework file inspection; Write for saving the self-audit report to governance/output/
 allowed-tools:
   - Read
   - Glob
   - Grep
-  - Bash
+  - Write
 ---
 
 ## self-audit
@@ -82,7 +83,7 @@ The self-audit report must include:
 
 - Scope is fixed. Do not add or remove files from the audit target list without updating
   this skill and running a new self-audit afterward.
-- This skill is read-only except for writing the output report.
+- Write access is scoped to `governance/output/` only. Do not modify any framework file.
 - The self-audit report is the framework's health record. Never delete it.
 - If the framework itself fails the Safety hard gate on any component, report it
   prominently at the top of the output.

@@ -8,11 +8,13 @@ when_to_use: >
 argument-hint: "[file path to audit]"
 disable-model-invocation: true
 context: fork
+# Read/Glob/Grep for asset inspection; Write for saving the output report to governance/output/
 allowed-tools:
   - Read
   - Glob
   - Grep
   - Bash
+  - Write
 ---
 
 ## audit-asset
@@ -50,7 +52,7 @@ Invokes the `super-auditor` agent against a single file path.
 
 ### Constraints
 
-- This skill is read-only. Do not modify the audited asset.
+- Do not modify the audited asset. Write access is scoped to `governance/output/` only.
 - Do not inline scoring rubrics — they live in `governance/scoring-standard.md`.
 - Do not collapse findings into summaries — each finding gets its own table row.
 - If the Safety hard gate is triggered (sub-score < 3/5 or unresolved CRITICAL),

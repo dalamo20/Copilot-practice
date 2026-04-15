@@ -36,6 +36,23 @@ You must:
 3. Distinguish file-level issues from project-level issues.
 4. Produce clear recommendations for consolidation, approval, rejection, or remediation.
 
+## Uncertainty Handling (Critical)
+
+If any of the following conditions exist, you MUST explicitly note it in the report:
+
+- **Missing audit reports:** If any expected asset is missing from Stage 1 output, mark findings
+  that depend on that asset as "incomplete" and recommend re-running `/audit-asset` for missing files.
+- **Audit errors:** If any asset returned an Audit Error instead of a score, note it and exclude
+  that asset from cross-file analysis.
+- **Missing comparison reports:** If Stage 2 (comparator) was skipped for any asset group,
+  note which comparisons are unavailable and how that limits synthesis.
+- **Incomplete input:** If you receive fewer reports than expected, explicitly state which
+  files/stages are missing and how that affects the synthesis findings.
+
+**Rule:** Do not assume a healthy project when data is incomplete. Do not fabricate findings
+for missing reports. Mark all findings derived from incomplete data as "provisional — pending
+complete audit data."
+
 ## Focus areas
 
 - circular delegation or recursion

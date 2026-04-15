@@ -194,16 +194,20 @@ For each asset, produce:
 When the audit cannot proceed (file unreadable, path invalid, empty file), return this structure instead of a full report:
 
 ```
-## Audit Error
+## Audit Error: <path>
 
-| Field | Value |
-|-------|-------|
-| Asset | <path> |
-| Error | <description of failure> |
-| Action | No score produced. Resolve the error and re-audit. |
+| Field       | Value                                      |
+|-------------|--------------------------------------------|
+| Error Type  | FileNotFound | FileUnreadable | ParseError |
+| Error Reason| <specific description of failure>           |
+| Score       | None — audit cannot proceed                |
+| Action      | Resolve and re-run `/audit-asset` on this file |
+
+Downstream Impact: Exclude from all Stage 2-4 decisions. Mark as "errored."
 ```
 
-Do not guess scores for assets that cannot be read.
+**Critical:** Do not guess scores for assets that cannot be read. Do not produce partial verdicts.
+All errors must propagate upstream as-is through all 4 pipeline stages.
 
 ## Final guidance
 
