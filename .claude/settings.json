@@ -1,0 +1,45 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(*)",
+      "Bash(git status*)",
+      "Bash(git log*)",
+      "Bash(git diff*)",
+      "Bash(git show*)"
+    ],
+    "deny": [
+      "Bash(git push*)",
+      "Bash(git commit*)",
+      "Bash(rm *)",
+      "Write(governance/scoring-standard.md)",
+      "Write(governance/references/anti-patterns.md)",
+      "Write(.claude/agents/*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pwsh -NoProfile -File .claude/hooks/warn-governance-edit.ps1",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pwsh -NoProfile -File .claude/hooks/log-governance-change.ps1",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
